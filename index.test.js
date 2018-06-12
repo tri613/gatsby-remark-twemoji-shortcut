@@ -1,5 +1,24 @@
 const cheerio = require("cheerio");
-const { shortcutToTwemoji, mutateSource } = require("./index.js");
+
+const twemoji = require("twemoji");
+const {
+  shortcutToUnicode,
+  shortcutToTwemoji,
+  mutateSource
+} = require("./index.js");
+
+describe("shortcutToUnicode", () => {
+  it("should return unicode instead of shortcuts", () => {
+    expect(shortcutToUnicode(":smile:")).toBe("😄");
+    expect(shortcutToUnicode(":+1:")).toBe("👍");
+  });
+
+  it("should return shortcuts if unicode not found", () => {
+    expect(shortcutToUnicode(":whatever:")).toBe(":whatever:");
+    expect(shortcutToUnicode(":sdfs::23434:")).toBe(":sdfs::23434:");
+    expect(shortcutToUnicode(":cool::heart:")).toBe(":cool::heart:");
+  });
+});
 
 describe("shortcutToTwemoji", () => {
   it("should return emoji instead of shortcuts", () => {
@@ -8,7 +27,7 @@ describe("shortcutToTwemoji", () => {
     const result = shortcutToTwemoji(content);
 
     const $ = cheerio.load(result);
-    expect($.root().find("img").length).toEqual(2);
+    expect($.root().find("img").length).toEqual(3);
   });
 
   it("should not break with invalid shortcuts", () => {
@@ -20,7 +39,7 @@ describe("shortcutToTwemoji", () => {
   });
 
   it("should merge option styles", () => {
-    const content = ":123123::heart::heart_eyes:just some text:cool::100:";
+    const content = ":123123: :heart: :heart_eyes: just some text :cool: :100:";
     const style = {
       "background-color": `#BAD123`
     };
@@ -34,13 +53,9 @@ describe("shortcutToTwemoji", () => {
   });
 
   it("should add option's classname", () => {
-    const content = ":123123::heart::heart_eyes:just some text:cool::100:";
-    const style = {
-      "background-color": `#BAD123`
-    };
+    const content = ":123123: :heart: :heart_eyes: just some text :cool: :100:";
     const result = shortcutToTwemoji(content, {
-      classname: "my-class-name another-class-name",
-      style
+      classname: "my-class-name another-class-name"
     });
 
     const $ = cheerio.load(result);
@@ -48,8 +63,6 @@ describe("shortcutToTwemoji", () => {
     expect($img.hasClass("another-class-name")).toBeTruthy();
     expect($img.hasClass("my-class-name")).toBeTruthy();
     expect($img.hasClass("emoji")).toBeTruthy();
-
-    expect($img.css("background-color")).toEqual("#BAD123");
   });
 });
 
