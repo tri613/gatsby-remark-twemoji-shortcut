@@ -13,5 +13,9 @@
   },
   "scripts": {
     "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tri613/gatsby-remark-twemoji.git"
   }
 }
