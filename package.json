@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-remark-twemoji",
+  "name": "gatsby-remark-twemoji-shortcut",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -16,6 +16,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tri613/gatsby-remark-twemoji.git"
+    "url": "git+https://github.com/tri613/gatsby-remark-twemoji-shortcut.git"
   }
 }
