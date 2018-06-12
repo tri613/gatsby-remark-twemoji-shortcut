@@ -1,6 +1,4 @@
 const cheerio = require("cheerio");
-
-const twemoji = require("twemoji");
 const {
   shortcutToUnicode,
   shortcutToTwemoji,
