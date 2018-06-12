@@ -37,7 +37,7 @@ module.exports = {
     const result = shortcutToTwemoji(content, pluginOptions);
 
     markdownNode.internal.content = result;
-    return Promise.resolve(result);
+    return Promise.resolve();
   },
   shortcutToTwemoji
 };
