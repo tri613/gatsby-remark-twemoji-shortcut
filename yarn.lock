@@ -762,10 +762,6 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-emojione@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/emojione/-/emojione-3.1.4.tgz#828767fbbe2ffd4fa75ebeeba9873e83643d6664"
-
 entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
