@@ -1,5 +1,6 @@
 {
   "name": "gatsby-remark-twemoji-shortcut",
+  "description": "Add twitter emoji to gatsby markdown.",
   "author": {
     "name": "Trina Lu",
     "email": "tri613@gmail.com"
