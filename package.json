@@ -10,6 +10,9 @@
     "cheerio": "^1.0.0-rc.2",
     "jest": "^23.1.0"
   },
+  "peerDependencies": {
+    "gatsby-transformer-remark": "^1.7.42"
+  },
   "scripts": {
     "test": "jest --watch"
   },
