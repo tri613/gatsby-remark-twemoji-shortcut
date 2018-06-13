@@ -52,7 +52,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-twemoji-shortcut`,
             options: {
-              classname: 'some_classname another_classname', // add additional classname to the emoji
+              classname: 'some_classname another_classname', // add additional classname(s) to the emoji
               style: { 
                 // add additional inline-styling to the emoji
                 background: 'gold'
@@ -81,7 +81,7 @@ img.emoji {
 ```
 
 ## Usage
-Just write shortcuts in your markdown and it will be transformed into twitter emojis!
+Just write emoji shortcuts in your markdown and it will be transformed into twitter emojis!
 
 A markdown post like this:
 
