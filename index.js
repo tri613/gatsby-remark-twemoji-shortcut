@@ -30,7 +30,7 @@ function shortcutToTwemoji(content, options = {}) {
     .map(key => `${key}: ${mergedOptions.style[key]}`)
     .join(";");
 
-  const result = content.replace(/:(\S*):/g, shortcut => {
+  const result = content.replace(/([a-z0-9+\-_]+)(?=:):/g, shortcut => {
     const toUnicode = shortcutToUnicode(shortcut);
     const toTwemoji = twemoji.parse(toUnicode);
 
