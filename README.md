@@ -80,6 +80,9 @@ img.emoji {
 }
 ```
 
+The styles will be merged with default and additional (option) styles.
+If you pass in a css property which exists in the default, the default style would be overwritten by the additional style.
+
 ## Usage
 Just write emoji shortcuts in your markdown and it will be transformed into twitter emojis!
 
