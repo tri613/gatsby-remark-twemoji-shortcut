@@ -33,6 +33,7 @@ describe('plugin', () => {
     const $ = cheerio.load(markdownNode.internal.content);
     const $imgs = $.root().find('img.emoji');
     expect($imgs.length).toEqual(3);
+    expect($imgs.attr('alt')).toEqual(expect.not.stringContaining('<img'));
   });
 
   it('should work properly with options', () => {
@@ -51,11 +52,25 @@ describe('plugin', () => {
         }
       }
     );
-    const $ = cheerio.load(markdownNode.internal.content);
 
+    const $ = cheerio.load(markdownNode.internal.content);
     const $imgs = $.root().find('img.emoji');
     expect($imgs.length).toEqual(3);
     expect($imgs.hasClass('test')).toBeTruthy();
     expect($imgs.css('whatever')).toBe('123');
+  });
+
+  it('should not break by processing multiple times', () => {
+    const markdownNode = {
+      internal: {
+        content
+      }
+    };
+    mutateSource({ markdownNode });
+    mutateSource({ markdownNode });
+    const $ = cheerio.load(markdownNode.internal.content);
+    const $imgs = $.root().find('img.emoji');
+    expect($imgs.length).toEqual(3);
+    expect($imgs.attr('alt')).toEqual(expect.not.stringContaining('<img'));
   });
 });

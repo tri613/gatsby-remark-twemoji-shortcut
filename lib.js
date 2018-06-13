@@ -1,3 +1,4 @@
+const cheerio = require('cheerio');
 const twemoji = require('twemoji');
 // https://github.com/github/gemoji
 const emojis = require('./emoji.json');
@@ -16,42 +17,29 @@ function replaceShortcut(content, replacement) {
   return result;
 }
 
-function parseTwemoji(content, classnames, styles) {
+function parseTwemoji(content, classname, styles) {
   const twitterEmoji = twemoji.parse(content);
-  return twitterEmoji.replace(
-    /<img class="emoji" draggable="false" alt="([^\s]*)" src="([a-zA-Z0-9@:%_\\+.~#?&/=]*)"\/>/g,
-    (_, alt, src) =>
-      `<img draggable="false" class="${classnames}" src="${src}" style="${styles}" alt="emoji"/>`
-  );
+  const $ = cheerio.load(twitterEmoji, { xmlMode: true });
+
+  const $emojis = $('img.emoji');
+  $emojis.addClass(classname).css(styles);
+  $emojis.each((i, el) => {
+    const $emoji = $(el);
+    const unicode = encodeURIComponent($emoji.attr('alt'));
+    $emoji.attr('alt', unicode);
+  });
+
+  return $.html();
 }
 
-function shortcutToTwemoji(content, options = {}) {
-  const { classname = '', style = {} } = options;
-  const mergedOptions = {
-    classname,
-    style: Object.assign(
-      {},
-      {
-        height: `1em`,
-        width: `1em`,
-        margin: `0 .05em 0 .1em`,
-        'vertical-align': `-0.1e`
-      },
-      style
-    )
+function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
+  const defaultStyle = {
+    height: `1em`,
+    width: `1em`,
+    margin: `0 .05em 0 .1em`,
+    'vertical-align': `-0.1e`
   };
-
-  // prepare classnames and inline styles
-  const classnames = [
-    'emoji',
-    ...mergedOptions.classname.split(' ').map(name => name.trim())
-  ]
-    .filter(name => !!name)
-    .join(' ');
-
-  const styles = Object.keys(mergedOptions.style)
-    .map(key => `${key}: ${mergedOptions.style[key]}`)
-    .join(';');
+  const mergedStyle = Object.assign({}, defaultStyle, style);
 
   // replace shortcuts with unicode
   const replaced = replaceShortcut(content, shortcut => {
@@ -59,8 +47,17 @@ function shortcutToTwemoji(content, options = {}) {
     return unicode ? unicode : shortcut;
   });
 
-  const twittered = parseTwemoji(replaced, classnames, styles);
-  return twittered;
+  const twittered = parseTwemoji(replaced, classname, mergedStyle);
+
+  // decode alt's unicode
+  const $ = cheerio.load(twittered, { xmlMode: true });
+  $('img.emoji').each((i, el) => {
+    const $emoji = $(el);
+    const alt = decodeURIComponent($emoji.attr('alt'));
+    $emoji.attr('alt', alt);
+  });
+
+  return $.html();
 }
 
 module.exports = {
