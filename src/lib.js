@@ -3,11 +3,17 @@ const twemoji = require("twemoji");
 const emojis = require("./emoji.json");
 
 function shortcutToUnicode(shortcut) {
-  const result = emojis.find(emoji =>
-    emoji.aliases.includes(shortcut.replace(/:/g, ""))
-  );
+  const alias = shortcut.replace(/:/g, "");
+  const result = emojis.find(emoji => emoji.aliases.includes(alias));
+  return result ? result.emoji : null;
+}
 
-  return result ? result.emoji : shortcut;
+function replaceShortcut(content, replacement) {
+  let result = content;
+  content.replace(/(?=(:[a-z0-9\-\+_]+:))/g, (_, substr) => {
+    result = result.replace(substr, replacement);
+  });
+  return result;
 }
 
 function shortcutToTwemoji(content, options = {}) {
@@ -30,11 +36,14 @@ function shortcutToTwemoji(content, options = {}) {
     .map(key => `${key}: ${mergedOptions.style[key]}`)
     .join(";");
 
-  const result = content.replace(/([a-z0-9+\-_]+)(?=:):/g, shortcut => {
-    const toUnicode = shortcutToUnicode(shortcut);
-    const toTwemoji = twemoji.parse(toUnicode);
+  const result = replaceShortcut(content, substr => {
+    const unicode = shortcutToUnicode(substr);
+    if (!unicode) {
+      return substr;
+    }
 
-    const styled = toTwemoji
+    const twitterEmoji = twemoji.parse(unicode);
+    const styled = twitterEmoji
       .split(/<img class="emoji"/g)
       .join(`<img class="emoji ${mergedOptions.classname}" style="${styles}"`);
 
@@ -45,13 +54,7 @@ function shortcutToTwemoji(content, options = {}) {
 }
 
 module.exports = {
-  mutateSource: ({ markdownNode }, pluginOptions) => {
-    const content = markdownNode.internal.content;
-    const result = shortcutToTwemoji(content, pluginOptions);
-
-    markdownNode.internal.content = result;
-    return Promise.resolve();
-  },
   shortcutToTwemoji,
-  shortcutToUnicode
+  shortcutToUnicode,
+  replaceShortcut
 };

@@ -2,8 +2,27 @@ const cheerio = require("cheerio");
 const {
   shortcutToUnicode,
   shortcutToTwemoji,
-  mutateSource
-} = require("./index.js");
+  replaceShortcut
+} = require("./../lib");
+
+const replaceWithUnicode = shortcut => {
+  const unicode = shortcutToUnicode(shortcut);
+  return unicode ? unicode : shortcut;
+};
+
+describe("replaceShortcut", () => {
+  it("shoud replace all valid shortcuts to emojis", () => {
+    const content = "simple one :100::+1::-1::heart_eyes:";
+    const result = replaceShortcut(content, replaceWithUnicode);
+    expect(result).toBe("simple one 💯👍👎😍");
+  });
+
+  it("should work fine with invalid shortcuts", () => {
+    const content = ":some content :123:34:45::cool::sunglasses:";
+    const result = replaceShortcut(content, replaceWithUnicode);
+    expect(result).toBe(":some content :123:34:45:🆒😎");
+  });
+});
 
 describe("shortcutToUnicode", () => {
   it("should return unicode instead of shortcuts", () => {
@@ -13,10 +32,9 @@ describe("shortcutToUnicode", () => {
     expect(shortcutToUnicode(":heart:")).toBe("❤️");
   });
 
-  it("should return shortcuts if unicode not found", () => {
-    expect(shortcutToUnicode(":whatever:")).toBe(":whatever:");
-    expect(shortcutToUnicode(":sdfs::23434:")).toBe(":sdfs::23434:");
-    expect(shortcutToUnicode(":cool::heart:")).toBe(":cool::heart:");
+  it("should return null if unicode not found", () => {
+    expect(shortcutToUnicode(":whatever:")).toBeNull();
+    expect(shortcutToUnicode(":123:")).toBeNull();
   });
 });
 
@@ -77,54 +95,5 @@ describe("shortcutToTwemoji", () => {
     expect(
       classnames.every(classname => classname.includes("emoji"))
     ).toBeTruthy();
-  });
-});
-
-describe("plugin", () => {
-  const markdownNode = {
-    internal: {
-      content: `
-        ---
-        datetime: "2017-11-07 18:23:56"
-        title: "Some code! #2"
-        tags: ["hello", "cool", "sleepy"]
-        published: true
-        ---
-  
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta ea magnam quis quod voluptatem eos illo est odio maiores illum cumque dignissimos ullam sed, repellat quo sapiente repellendus eius sint.
-
-        :laughing::cry:
-
-        ## Cool section:sparkles:
-  
-        * item 1
-        * item 2
-  
-        <!--read more-->
-  
-        Some secret message here
-      `
-    }
-  };
-
-  it("should work properly without options", () => {
-    mutateSource({ markdownNode });
-    const $ = cheerio.load(markdownNode.internal.content);
-    const $imgs = $.root().find("img.emoji");
-    expect($imgs.length).toEqual(3);
-  });
-
-  it("should work properly with options", () => {
-    return expect(
-      mutateSource(
-        { markdownNode },
-        {
-          classname: "test",
-          style: {
-            whatever: "123"
-          }
-        }
-      )
-    ).resolves.toBeUndefined();
   });
 });
