@@ -2,18 +2,18 @@ const twemoji = require("twemoji");
 // https://github.com/github/gemoji
 const emojis = require("./emoji.json");
 
-function shortcutToUnicode(shortcut) {
-  const alias = shortcut.replace(/:/g, "");
-  const result = emojis.find(emoji => emoji.aliases.includes(alias));
-  return result ? result.emoji : null;
-}
-
 function replaceShortcut(content, replacement) {
   let result = content;
   content.replace(/(?=(:[a-z0-9\-\+_]+:))/g, (_, substr) => {
     result = result.replace(substr, replacement);
   });
   return result;
+}
+
+function shortcutToUnicode(shortcut) {
+  const alias = shortcut.replace(/:/g, "");
+  const result = emojis.find(emoji => emoji.aliases.includes(alias));
+  return result ? result.emoji : null;
 }
 
 function shortcutToTwemoji(content, options = {}) {
@@ -36,10 +36,11 @@ function shortcutToTwemoji(content, options = {}) {
     .map(key => `${key}: ${mergedOptions.style[key]}`)
     .join(";");
 
-  const result = replaceShortcut(content, substr => {
-    const unicode = shortcutToUnicode(substr);
+  const result = replaceShortcut(content, shortcut => {
+    const unicode = shortcutToUnicode(shortcut);
+
     if (!unicode) {
-      return substr;
+      return shortcut;
     }
 
     const twitterEmoji = twemoji.parse(unicode);
