@@ -80,7 +80,7 @@ describe("shortcutToTwemoji", () => {
   });
 });
 
-describe("Plugin", () => {
+describe("plugin", () => {
   const markdownNode = {
     internal: {
       content: `
