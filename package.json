@@ -19,5 +19,12 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tri613/gatsby-remark-twemoji-shortcut.git"
-  }
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-remark",
+    "emoji",
+    "markdown"
+  ]
 }
