@@ -29,23 +29,26 @@ describe("plugin", () => {
   };
 
   it("should work properly without options", () => {
-    mutateSource({ markdownNode });
+    mutateSource({ markdownNode: { ...markdownNode } });
     const $ = cheerio.load(markdownNode.internal.content);
     const $imgs = $.root().find("img.emoji");
     expect($imgs.length).toEqual(3);
   });
 
   it("should work properly with options", () => {
-    return expect(
-      mutateSource(
-        { markdownNode },
-        {
-          classname: "test",
-          style: {
-            whatever: "123"
-          }
+    mutateSource(
+      { markdownNode: { ...markdownNode } },
+      {
+        classname: "test",
+        style: {
+          whatever: "123"
         }
-      )
-    ).resolves.toBeUndefined();
+      }
+    );
+    const $ = cheerio.load(markdownNode.internal.content);
+    const $imgs = $.root().find("img.emoji");
+    expect($imgs.length).toEqual(3);
+    expect($imgs.hasClass("test")).toBeTruthy();
+    expect($imgs.css("whatever")).toBe("123");
   });
 });
