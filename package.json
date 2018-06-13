@@ -4,8 +4,8 @@
     "name": "Trina Lu",
     "email": "tri613@gmail.com"
   },
-  "version": "0.9.2",
-  "main": "src/index.js",
+  "version": "0.9.3",
+  "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "twemoji": "^11.0.0"
