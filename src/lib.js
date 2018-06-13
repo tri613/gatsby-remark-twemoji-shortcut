@@ -4,7 +4,7 @@ const emojis = require("./emoji.json");
 
 function replaceShortcut(content, replacement) {
   let result = content;
-  content.replace(/(?=(:[a-z0-9\-\+_]+:))/g, (_, substr) => {
+  content.replace(/(?=(:[\w\-\+]+:))/g, (_, substr) => {
     result = result.replace(substr, replacement);
   });
   return result;
