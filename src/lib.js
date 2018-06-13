@@ -2,18 +2,18 @@ const twemoji = require("twemoji");
 // https://github.com/github/gemoji
 const emojis = require("./emoji.json");
 
+function shortcutToUnicode(shortcut) {
+  const alias = shortcut.replace(/:/g, "");
+  const result = emojis.find(emoji => emoji.aliases.includes(alias));
+  return result ? result.emoji : null;
+}
+
 function replaceShortcut(content, replacement) {
   let result = content;
   content.replace(/(?=(:[\w\-\+]+:))/g, (_, substr) => {
     result = result.replace(substr, replacement);
   });
   return result;
-}
-
-function shortcutToUnicode(shortcut) {
-  const alias = shortcut.replace(/:/g, "");
-  const result = emojis.find(emoji => emoji.aliases.includes(alias));
-  return result ? result.emoji : null;
 }
 
 function shortcutToTwemoji(content, options = {}) {
@@ -58,6 +58,6 @@ function shortcutToTwemoji(content, options = {}) {
 
 module.exports = {
   shortcutToTwemoji,
-  shortcutToUnicode,
-  replaceShortcut
+  replaceShortcut,
+  shortcutToUnicode
 };

@@ -1,28 +1,9 @@
 const cheerio = require("cheerio");
 const {
   shortcutToUnicode,
-  shortcutToTwemoji,
-  replaceShortcut
+  replaceShortcut,
+  shortcutToTwemoji
 } = require("./../lib");
-
-const replaceWithUnicode = shortcut => {
-  const unicode = shortcutToUnicode(shortcut);
-  return unicode ? unicode : shortcut;
-};
-
-describe("replaceShortcut", () => {
-  it("shoud replace all valid shortcuts to emojis", () => {
-    const content = "simple one :100::+1::-1::heart_eyes:";
-    const result = replaceShortcut(content, replaceWithUnicode);
-    expect(result).toBe("simple one 💯👍👎😍");
-  });
-
-  it("should work fine with invalid shortcuts", () => {
-    const content = ":some content :123:34:45::cool::sunglasses:";
-    const result = replaceShortcut(content, replaceWithUnicode);
-    expect(result).toBe(":some content :123:34:45:🆒😎");
-  });
-});
 
 describe("shortcutToUnicode", () => {
   it("should return unicode instead of shortcuts", () => {
@@ -35,6 +16,25 @@ describe("shortcutToUnicode", () => {
   it("should return null if unicode not found", () => {
     expect(shortcutToUnicode(":whatever:")).toBeNull();
     expect(shortcutToUnicode(":123:")).toBeNull();
+  });
+});
+
+describe("replaceShortcut", () => {
+  const replaceWithUnicode = shortcut => {
+    const unicode = shortcutToUnicode(shortcut);
+    return unicode ? unicode : shortcut;
+  };
+
+  it("shoud replace all valid shortcuts to emojis", () => {
+    const content = "simple one :100::+1::-1::heart_eyes:";
+    const result = replaceShortcut(content, replaceWithUnicode);
+    expect(result).toBe("simple one 💯👍👎😍");
+  });
+
+  it("should work fine with invalid shortcuts", () => {
+    const content = ":some content :123:34:45:cool::sunglasses:heart:";
+    const result = replaceShortcut(content, replaceWithUnicode);
+    expect(result).toBe(":some content :123:34:45🆒😎heart:");
   });
 });
 
