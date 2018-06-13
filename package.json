@@ -31,5 +31,8 @@
     "gatsby-remark",
     "emoji",
     "markdown"
-  ]
+  ],
+  "prettier": {
+    "singleQuote": true
+  }
 }
