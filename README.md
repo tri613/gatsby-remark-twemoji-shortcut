@@ -10,9 +10,9 @@ This package is not on npm yet, so either you can add it as a submodule, or use 
 
 #### Submodule with local plugins
 
-- Head over to your gatsby project root, add a folder called `plugins`
-- Go into the `plugins` directory
-- Add this plugin as a submodule
+- Head over to your gatsby project root, add a folder called `plugins`.
+- Go into the `plugins` directory.
+- Add this plugin as a submodule.
 
 ```bash
 $ git submodule add https://github.com/tri613/gatsby-remark-twemoji-shortcut.git
@@ -26,7 +26,7 @@ project
 └─── ...other stuffs
 ```
 
-  - See more about local plugins on [Gatsby.js](https://www.gatsbyjs.org/docs/plugin-authoring/#local-plugins)
+You can read more about local plugins on [Gatsby.js](https://www.gatsbyjs.org/docs/plugin-authoring/#local-plugins).
 
 #### Install with yarn / npm
 
@@ -99,7 +99,7 @@ Get turns into this:
 
 ![](https://i.imgur.com/QBnHp2s.png)
 
-Tada :tada:
+That's it! :tada:
 
 ## Special Thanks
 
