@@ -6,35 +6,14 @@ A [gatsby-transformer-remark](https://github.com/gatsbyjs/gatsby/tree/master/pac
 
 ### Install package
 
-This package is not on npm yet, so either you can add it as a submodule, or use `git+https` to add it to your npm package.
-
-#### Submodule with local plugins
-
-- Head over to your gatsby project root, add a folder called `plugins`.
-- Go into the `plugins` directory.
-- Add this plugin as a submodule.
-
-```bash
-$ git submodule add https://github.com/tri613/gatsby-remark-twemoji-shortcut.git
 ```
-- Eventually, your project would look like this:
-```
-project
-└─── plugins
-│    └───gatsby-remark-twemoji-shortcut
-└─── src
-└─── ...other stuffs
+yarn add gatsby-remark-twemoji-shortcut
 ```
 
-You can read more about local plugins on [Gatsby.js](https://www.gatsbyjs.org/docs/plugin-authoring/#local-plugins).
-
-#### Install with yarn / npm
+or 
 
 ```
-$ yarn add git+https://github.com/tri613/gatsby-remark-twemoji-shortcut.git
-// or
-$ npm install git+https://github.com/tri613/gatsby-remark-twemoji-shortcut.git
-
+npm install gatsby-remark-twemoji-shortcut
 ```
 
 ### Add to your `gatsby-config.js`
