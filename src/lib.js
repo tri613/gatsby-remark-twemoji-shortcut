@@ -32,21 +32,23 @@ function shortcutToTwemoji(content, options = {}) {
     )
   };
 
+  // prepare classnames and inline styles
+  const classnames = [
+    "emoji",
+    ...mergedOptions.classname.split(" ").map(name => name.trim())
+  ].filter(name => !!name);
+
   const styles = Object.keys(mergedOptions.style)
     .map(key => `${key}: ${mergedOptions.style[key]}`)
     .join(";");
 
+  // replace shortcuts with unicode
   const replaced = replaceShortcut(content, shortcut => {
     const unicode = shortcutToUnicode(shortcut);
     return unicode ? unicode : shortcut;
   });
 
   const twitterEmoji = twemoji.parse(replaced);
-  const classnames = [
-    "emoji",
-    ...mergedOptions.classname.split(" ").map(name => name.trim())
-  ].filter(name => !!name.trim());
-
   const styled = twitterEmoji
     .split(/<img class="emoji"/g)
     .join(`<img class="${classnames.join(" ")}" style="${styles}"`);
