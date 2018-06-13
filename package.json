@@ -1,7 +1,7 @@
 {
   "name": "gatsby-remark-twemoji-shortcut",
-  "version": "0.9.0",
-  "main": "index.js",
+  "version": "0.9.1",
+  "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
     "twemoji": "^11.0.0"
