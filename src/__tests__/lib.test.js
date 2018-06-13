@@ -61,21 +61,54 @@ describe("shortcutToTwemoji", () => {
   it("should merge option styles", () => {
     const content = ":123123::heart::heart_eyes: just some text :cool::100:";
     const color = `#BAD123`;
-    const style = { "background-color": color };
+    const style = { "background-color": color, height: `50px` };
     const result = shortcutToTwemoji(content, { style });
 
     const $ = cheerio.load(result);
-    const $img = $.root().find("img");
+    const $imgs = $.root().find("img");
 
-    expect($img.length).toEqual(4);
-    expect($img.css("background-color")).toEqual(color);
-    expect($img.css("height")).toEqual("1em");
+    expect($imgs.length).toEqual(4);
+    expect($imgs.css("background-color")).toEqual(color);
+    expect($imgs.css("height")).toEqual("50px");
+    expect($imgs.css("width")).toEqual("1em");
+  });
+
+  it("should not have an extra space if no additional classname", () => {
+    const content = ":heart:";
+    const result = shortcutToTwemoji(content);
+
+    const $ = cheerio.load(result);
+    const $img = $.root().find("img.emoji");
+    expect($img.attr("class")).toBe("emoji");
   });
 
   it("should add option classname", () => {
     const content = ":123123::heart::heart_eyes: just some text :cool::100:";
     const result = shortcutToTwemoji(content, {
-      classname: "my-class-name another-class-name"
+      classname: "only-one-class-name"
+    });
+
+    const $ = cheerio.load(result);
+    const $imgs = $.root().find("img.emoji");
+
+    const classnames = [];
+    $imgs.each(function(i, el) {
+      classnames.push($(el).attr("class"));
+    });
+
+    expect(
+      classnames.every(classname => classname.includes("only-one-class-name"))
+    ).toBeTruthy();
+
+    expect(
+      classnames.every(classname => classname.includes("emoji"))
+    ).toBeTruthy();
+  });
+
+  it("should add multiple option classnames", () => {
+    const content = ":123123::heart::heart_eyes: just some text :cool::100:";
+    const result = shortcutToTwemoji(content, {
+      classname: "my-class-name    another-class-name"
     });
 
     const $ = cheerio.load(result);

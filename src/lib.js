@@ -44,9 +44,14 @@ function shortcutToTwemoji(content, options = {}) {
     }
 
     const twitterEmoji = twemoji.parse(unicode);
+    const classnames = [
+      "emoji",
+      ...mergedOptions.classname.split(" ").map(name => name.trim())
+    ].filter(name => !!name.trim());
+
     const styled = twitterEmoji
       .split(/<img class="emoji"/g)
-      .join(`<img class="emoji ${mergedOptions.classname}" style="${styles}"`);
+      .join(`<img class="${classnames.join(" ")}" style="${styles}"`);
 
     return styled;
   });
