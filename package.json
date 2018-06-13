@@ -1,5 +1,9 @@
 {
   "name": "gatsby-remark-twemoji-shortcut",
+  "author": {
+    "name": "Trina Lu",
+    "email": "tri613@gmail.com"
+  },
   "version": "0.9.2",
   "main": "src/index.js",
   "license": "MIT",
