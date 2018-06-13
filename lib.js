@@ -37,7 +37,7 @@ function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
     height: `1em`,
     width: `1em`,
     margin: `0 .05em 0 .1em`,
-    'vertical-align': `-0.1e`
+    'vertical-align': `-0.1em`
   };
   const mergedStyle = Object.assign({}, defaultStyle, style);
 
