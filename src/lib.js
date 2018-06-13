@@ -36,27 +36,22 @@ function shortcutToTwemoji(content, options = {}) {
     .map(key => `${key}: ${mergedOptions.style[key]}`)
     .join(";");
 
-  const result = replaceShortcut(content, shortcut => {
+  const replaced = replaceShortcut(content, shortcut => {
     const unicode = shortcutToUnicode(shortcut);
-
-    if (!unicode) {
-      return shortcut;
-    }
-
-    const twitterEmoji = twemoji.parse(unicode);
-    const classnames = [
-      "emoji",
-      ...mergedOptions.classname.split(" ").map(name => name.trim())
-    ].filter(name => !!name.trim());
-
-    const styled = twitterEmoji
-      .split(/<img class="emoji"/g)
-      .join(`<img class="${classnames.join(" ")}" style="${styles}"`);
-
-    return styled;
+    return unicode ? unicode : shortcut;
   });
 
-  return result;
+  const twitterEmoji = twemoji.parse(replaced);
+  const classnames = [
+    "emoji",
+    ...mergedOptions.classname.split(" ").map(name => name.trim())
+  ].filter(name => !!name.trim());
+
+  const styled = twitterEmoji
+    .split(/<img class="emoji"/g)
+    .join(`<img class="${classnames.join(" ")}" style="${styles}"`);
+
+  return styled;
 }
 
 module.exports = {

@@ -58,6 +58,15 @@ describe("shortcutToTwemoji", () => {
     expect($.root().find("img").length).toEqual(3);
   });
 
+  it("shoud transfer normal emojis into twitter emojis", () => {
+    const content = `:smile::+1::some_thing_else:100:👍:cry::hand:`;
+    const result = shortcutToTwemoji(content);
+
+    const $ = cheerio.load(result);
+    expect($.root().find("img").length).toEqual(6);
+    expect($.root().text()).toEqual(":some_thing_else");
+  });
+
   it("should merge option styles", () => {
     const content = ":123123::heart::heart_eyes: just some text :cool::100:";
     const color = `#BAD123`;
