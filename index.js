@@ -1,31 +1,4 @@
-const { shortcutToTwemoji } = require('./lib');
-
-class CodeBlockExtractor {
-  constructor() {
-    this.cipher = '<!-- code block replacement -->';
-    this.codeCache = [];
-  }
-
-  extract(content) {
-    return content.replace(
-      /```[a-z]*\n[\s\S]*?\n```|`[^`\n]+`/g,
-      (codeBlock, index) => {
-        this.codeCache.push(codeBlock);
-        return this.cipher;
-      }
-    );
-  }
-
-  putBack(extracted) {
-    const regex = new RegExp(`${this.cipher}`, 'g');
-    let i = 0;
-    return extracted.replace(regex, (ciphered, index) => {
-      const result = this.codeCache[i] ? this.codeCache[i] : ciphered;
-      i++;
-      return result;
-    });
-  }
-}
+const { CodeBlockExtractor, shortcutToTwemoji } = require('./lib');
 
 function mutateSource({ markdownNode }, pluginOptions) {
   const content = markdownNode.internal.content;
@@ -40,4 +13,4 @@ function mutateSource({ markdownNode }, pluginOptions) {
   return Promise.resolve();
 }
 
-module.exports = { mutateSource, transform, CodeBlockExtractor };
+module.exports = { mutateSource };

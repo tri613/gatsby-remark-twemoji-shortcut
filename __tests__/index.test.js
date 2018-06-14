@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
 
-const { mutateSource, CodeBlockExtractor } = require('./../index');
+const { mutateSource } = require('./../index');
 
 const content = fs.readFileSync(path.resolve(__dirname, './example.md'), {
   encoding: 'utf8'
@@ -61,17 +61,5 @@ describe('plugin', () => {
     const $imgs = getImgs(markdownNode);
     expect($imgs.length).toEqual(7);
     expect($imgs.attr('alt')).toEqual(expect.not.stringContaining('<img'));
-  });
-});
-
-describe('CodeBlockExtractor', () => {
-  it('should put back code correctly', () => {
-    const original =
-      'simple_text\n```js\nvar foo = "bar";\n```\nanother line\n other_text `inline-code`\nend_of_text';
-    const extractor = new CodeBlockExtractor();
-    const extracted = extractor.extract(original);
-
-    const result = extractor.putBack(extracted);
-    expect(result).toBe(original);
   });
 });

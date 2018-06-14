@@ -3,6 +3,33 @@ const twemoji = require('twemoji');
 // https://github.com/github/gemoji
 const emojis = require('./emoji.json');
 
+class CodeBlockExtractor {
+  constructor() {
+    this.cipher = '<!-- code block replacement -->';
+    this.codeCache = [];
+  }
+
+  extract(content) {
+    return content.replace(
+      /```[a-z]*\n[\s\S]*?\n```|`[^`\n]+`/g,
+      (codeBlock, index) => {
+        this.codeCache.push(codeBlock);
+        return this.cipher;
+      }
+    );
+  }
+
+  putBack(extracted) {
+    const regex = new RegExp(`${this.cipher}`, 'g');
+    let i = 0;
+    return extracted.replace(regex, ciphered => {
+      const result = this.codeCache[i] ? this.codeCache[i] : ciphered;
+      i++;
+      return result;
+    });
+  }
+}
+
 function shortcutToUnicode(shortcut) {
   const alias = shortcut.replace(/:/g, '');
   const result = emojis.find(emoji => emoji.aliases.includes(alias));
@@ -61,6 +88,7 @@ function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
 }
 
 module.exports = {
+  CodeBlockExtractor,
   shortcutToTwemoji,
   replaceShortcut,
   shortcutToUnicode
