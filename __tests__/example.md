@@ -8,7 +8,7 @@ published: true
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta ea magnam quis quod voluptatem eos illo est odio maiores illum cumque dignissimos ullam sed, repellat quo sapiente repellendus eius sint.
 
 ```javascript
-:100:
+:100:😃
 ```
 
 :laughing: :1st_place_medal: :+1:🏷
@@ -28,4 +28,4 @@ _bold_
 code block :smile::1st_place_medal: :+1:
 ```
 
-Some secret message here `:cry::1st_place_medal::+1:`
+Some secret message here `:cry:😃:1st_place_medal::+1:`

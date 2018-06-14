@@ -30,10 +30,15 @@ describe('plugin', () => {
     expect($imgs.length).toEqual(7);
     expect($imgs.attr('alt')).toEqual(expect.not.stringContaining('<img'));
     expect(markdownNode.internal.content).toEqual(
-      expect.stringContaining(`:100:`)
+      expect.stringContaining(`:100:😃`)
     );
     expect(markdownNode.internal.content).toEqual(
       expect.stringContaining(`:1st_place_medal::+1:`)
+    );
+    expect(markdownNode.internal.content).toEqual(
+      expect.stringContaining(
+        'Some secret message here `:cry:😃:1st_place_medal::+1:`'
+      )
     );
   });
 
