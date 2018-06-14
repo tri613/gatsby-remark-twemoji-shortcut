@@ -7,9 +7,17 @@ published: true
 
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta ea magnam quis quod voluptatem eos illo est odio maiores illum cumque dignissimos ullam sed, repellat quo sapiente repellendus eius sint.
 
-:laughing::cry::1st_place_medal::+1:
+```javascript
+:100:
+```
 
-## Cool section:sparkles:
+:laughing: :1st_place_medal: :+1:🏷
+:sagittarius::1st_place_medal:😆
+
+1st_place_medal
+_bold_
+
+## Cool section
 
 * item 1
 * item 2
@@ -20,4 +28,4 @@ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta ea magnam quis 
 code block :smile::1st_place_medal: :+1:
 ```
 
-Some secret message here `:cry::1st_place_medal: :+1:`
+Some secret message here `:cry::1st_place_medal::+1:`
