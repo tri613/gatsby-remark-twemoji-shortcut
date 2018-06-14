@@ -10,17 +10,14 @@ class CodeBlockExtractor {
   }
 
   extract(content) {
-    return content.replace(
-      /```[a-z]*\n[\s\S]*?\n```|`[^`\n]+`/g,
-      (codeBlock, index) => {
-        this.codeCache.push(codeBlock);
-        return this.cipher;
-      }
-    );
+    return content.replace(/```[a-z]*\n[\s\S]*?\n```|`[^`\n]+`/g, codeBlock => {
+      this.codeCache.push(codeBlock);
+      return this.cipher;
+    });
   }
 
   putBack(extracted) {
-    const regex = new RegExp(`${this.cipher}`, 'g');
+    const regex = new RegExp(this.cipher, 'g');
     let i = 0;
     return extracted.replace(regex, ciphered => {
       const result = this.codeCache[i] ? this.codeCache[i] : ciphered;
@@ -50,10 +47,11 @@ function parseTwemoji(content, classname, styles) {
 
   const $emojis = $('img.emoji');
   $emojis.addClass(classname).css(styles);
-  $emojis.each((i, el) => {
+  $emojis.each((_, el) => {
     const $emoji = $(el);
-    const unicode = encodeURIComponent($emoji.attr('alt'));
-    $emoji.attr('alt', unicode);
+    // encode the emoji unicode to avoid converting it into twitter emoji
+    const encoded = encodeURIComponent($emoji.attr('alt'));
+    $emoji.attr('alt', encoded);
   });
 
   return $.html();
@@ -78,7 +76,7 @@ function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
 
   // decode alt's unicode
   const $ = cheerio.load(twittered, { xmlMode: true });
-  $('img.emoji').each((i, el) => {
+  $('img.emoji').each((_, el) => {
     const $emoji = $(el);
     const alt = decodeURIComponent($emoji.attr('alt'));
     $emoji.attr('alt', alt);
