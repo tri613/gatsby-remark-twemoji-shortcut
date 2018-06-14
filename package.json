@@ -15,6 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tri613/gatsby-remark-twemoji-shortcut.git"
-  }
+    "url": "https://github.com/tri613/gatsby-remark-twemoji-shortcut.git"
+  },
+  "bugs": "https://github.com/tri613/gatsby-remark-twemoji-shortcut/issues"
 }
