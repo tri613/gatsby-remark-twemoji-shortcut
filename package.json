@@ -9,10 +9,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "twemoji": "^11.0.0"
+    "twemoji": "^11.0.0",
+    "cheerio": "^1.0.0-rc.2"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.2",
     "jest": "^23.1.0"
   },
   "peerDependencies": {
