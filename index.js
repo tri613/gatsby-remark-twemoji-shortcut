@@ -1,4 +1,4 @@
-const { shortcutToTwemoji } = require("./lib");
+const { shortcutToTwemoji } = require('./lib');
 
 module.exports = {
   mutateSource: ({ markdownNode }, pluginOptions) => {

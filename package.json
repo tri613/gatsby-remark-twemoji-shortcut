@@ -1,6 +1,11 @@
 {
   "name": "gatsby-remark-twemoji-shortcut",
-  "version": "0.9.0",
+  "description": "Add twitter emoji to gatsby markdown.",
+  "author": {
+    "name": "Trina Lu",
+    "email": "tri613@gmail.com"
+  },
+  "version": "0.9.6",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -10,6 +15,9 @@
     "cheerio": "^1.0.0-rc.2",
     "jest": "^23.1.0"
   },
+  "peerDependencies": {
+    "gatsby-transformer-remark": "^1.7.42"
+  },
   "scripts": {
     "test": "jest --watch"
   },
@@ -17,5 +25,15 @@
     "type": "git",
     "url": "https://github.com/tri613/gatsby-remark-twemoji-shortcut.git"
   },
-  "bugs": "https://github.com/tri613/gatsby-remark-twemoji-shortcut/issues"
+  "bugs": "https://github.com/tri613/gatsby-remark-twemoji-shortcut/issues",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-remark",
+    "emoji",
+    "markdown"
+  ],
+  "prettier": {
+    "singleQuote": true
+  }
 }
