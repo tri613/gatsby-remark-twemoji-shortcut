@@ -7,8 +7,13 @@ published: true
 
 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta ea magnam quis quod voluptatem eos illo est odio maiores illum cumque dignissimos ullam sed, repellat quo sapiente repellendus eius sint.
 
+fishing><>
+
+`beer&peanuts`
+
 ```javascript
 :100:😃
+() => { Promise.resolve() }
 ```
 
 :laughing: :1st_place_medal: :+1:🏷

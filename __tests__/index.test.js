@@ -66,5 +66,14 @@ describe('plugin', () => {
     const $imgs = getImgs(markdownNode);
     expect($imgs.length).toEqual(7);
     expect($imgs.attr('alt')).toEqual(expect.not.stringContaining('<img'));
+    expect(markdownNode.internal.content).toEqual(
+      expect.stringContaining('() => { Promise.resolve() }')
+    );
+    expect(markdownNode.internal.content).toEqual(
+      expect.stringContaining('fishing&gt;&lt;&gt;')
+    );
+    expect(markdownNode.internal.content).toEqual(
+      expect.stringContaining('beer&peanuts')
+    );
   });
 });
