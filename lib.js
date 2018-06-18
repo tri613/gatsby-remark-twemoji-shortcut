@@ -3,6 +3,30 @@ const twemoji = require('twemoji');
 // https://github.com/github/gemoji
 const emojis = require('./emoji.json');
 
+class CodeBlockExtractor {
+  constructor() {
+    this.cipher = '<!-- code block replacement -->';
+    this.codeCache = [];
+  }
+
+  extract(content) {
+    return content.replace(/```[a-z]*\n[\s\S]*?\n```|`[^`\n]+`/g, codeBlock => {
+      this.codeCache.push(codeBlock);
+      return this.cipher;
+    });
+  }
+
+  putBack(extracted) {
+    const regex = new RegExp(this.cipher, 'g');
+    let i = 0;
+    return extracted.replace(regex, ciphered => {
+      const result = this.codeCache[i] ? this.codeCache[i] : ciphered;
+      i++;
+      return result;
+    });
+  }
+}
+
 function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
   const defaultStyle = {
     height: `1em`,
@@ -22,7 +46,7 @@ function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
 
   // decode alt's unicode
   const $ = cheerio.load(twittered, { xmlMode: true });
-  $('img.emoji').each((i, el) => {
+  $('img.emoji').each((_, el) => {
     const $emoji = $(el);
     const alt = decodeURIComponent($emoji.attr('alt'));
     $emoji.attr('alt', alt);
@@ -61,6 +85,7 @@ function parseTwemoji(content, classname, styles) {
 }
 
 module.exports = {
+  CodeBlockExtractor,
   shortcutToTwemoji,
   replaceShortcut,
   shortcutToUnicode

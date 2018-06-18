@@ -1,11 +1,16 @@
-const { shortcutToTwemoji } = require('./lib');
+const { CodeBlockExtractor, shortcutToTwemoji } = require('./lib');
 
-module.exports = {
-  mutateSource: ({ markdownNode }, pluginOptions) => {
-    const content = markdownNode.internal.content;
-    const result = shortcutToTwemoji(content, pluginOptions);
+function mutateSource({ markdownNode }, pluginOptions) {
+  const content = markdownNode.internal.content;
 
-    markdownNode.internal.content = result;
-    return Promise.resolve();
-  }
-};
+  // for skipping code blocks and keeping underscore shortcuts (e.g. :1st_place_medal:)
+  const extractor = new CodeBlockExtractor();
+  const extracted = extractor.extract(content);
+  const twittered = shortcutToTwemoji(extracted, pluginOptions);
+  const result = extractor.putBack(twittered);
+
+  markdownNode.internal.content = result;
+  return Promise.resolve();
+}
+
+module.exports = { mutateSource };
