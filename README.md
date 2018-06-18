@@ -83,6 +83,8 @@ Get turns into this:
 
 That's it! :tada:
 
+:point_right: This plugin also converts plain emojis (unicode) into twitter emojis!
+
 ## Special Thanks
 
 - The shortcut emoji mapping is pulled from [gemoji](https://github.com/github/gemoji), huge thanks for this awesome list.
