@@ -85,8 +85,17 @@ That's it! :tada:
 
 :point_right: This plugin also converts plain emojis (unicode) into twitter emojis!
 
+## Changelog
+
+### v0.10.0 release - 2018/06/18
+
+:warning: This is currently the most stable version and I strongly recommend user using v0.9.x upgrade to this version.
+
+- Add feature to skip shortcuts and plain emojis from inline codes or code blocks.
+
 ## Special Thanks
 
 - The shortcut emoji mapping is pulled from [gemoji](https://github.com/github/gemoji), huge thanks for this awesome list.
-
-- This repo is inspired by another great gatsby remark emoji plugin: https://github.com/matchilling/gatsby-remark-emojis.
+- This repo is inspired by other great gatsby remark emoji plugins!
+  - https://github.com/matchilling/gatsby-remark-emojis
+  - https://github.com/Rulikkk/gatsby-remark-emoji
