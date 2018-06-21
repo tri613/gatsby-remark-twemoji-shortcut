@@ -1,6 +1,6 @@
 # gatsby-remark-twemoji-shortcut
 
-A [gatsby-transformer-remark](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-transformer-remark) plugin to add twitter emoji with shortcuts! :sparkles:
+A [gatsby-transformer-remark](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-transformer-remark) plugin to add twitter emoji with shortcuts!✨
 
 ## Install
 
@@ -67,23 +67,31 @@ Just write emoji shortcuts in your markdown and it will be transformed into twit
 
 A markdown post like this:
 
-```
+``````
 ---
-datetime: "2018-06-13 15:33:38"
+datetime: "2018-06-21 11:00:24"
 title: "Twitter Emojis!"
 tags: ["emoji", "twitter", "plugin"]
 ---
+ 
+Add twitter emojis with no sweat. :sunglasses::heart::tada::sparkles::1st_place_medal::+1:
 
-Add twitter emojis with no sweat. :sunglasses::heart::tada::sparkles:
+It even works with plain emojis! 🌵🐦🐬
+
+Want to skip shortcuts? Sure! Try using backslashes. \:cool\:
+
+What if I put emojis inside a inline code? `🚆:car:🚌`
+
 ```
+What if I put emojis inside a code block? 🙉:grinning:🙉
+```
+``````
 
 Get turns into this:
 
-![](https://i.imgur.com/QBnHp2s.png)
+![](https://imgur.com/uLUgVX8.png)
 
-That's it! :tada:
-
-:point_right: This plugin also converts plain emojis (unicode) into twitter emojis!
+That's it! 🎉
 
 ## Special Thanks
 
