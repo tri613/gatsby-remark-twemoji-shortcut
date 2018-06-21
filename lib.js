@@ -42,17 +42,7 @@ function shortcutToTwemoji(content, { classname = '', style = {} } = {}) {
     return unicode ? unicode : shortcut;
   });
 
-  const twittered = parseTwemoji(replaced, classname, mergedStyle);
-
-  // decode alt's unicode
-  const $ = cheerio.load(twittered, { xmlMode: true });
-  $('img.emoji').each((_, el) => {
-    const $emoji = $(el);
-    const alt = decodeURIComponent($emoji.attr('alt'));
-    $emoji.attr('alt', alt);
-  });
-
-  return $.html();
+  return parseTwemoji(replaced, classname, mergedStyle);
 }
 
 function replaceShortcut(content, replacement) {
@@ -75,11 +65,6 @@ function parseTwemoji(content, classname, styles) {
 
   const $emojis = $('img.emoji');
   $emojis.addClass(classname).css(styles);
-  $emojis.each((i, el) => {
-    const $emoji = $(el);
-    const encoded = encodeURIComponent($emoji.attr('alt'));
-    $emoji.attr('alt', encoded);
-  });
 
   return $.html();
 }
