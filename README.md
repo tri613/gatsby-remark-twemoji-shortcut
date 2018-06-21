@@ -76,7 +76,7 @@ tags: ["emoji", "twitter", "plugin"]
  
 Add twitter emojis with no sweat. :sunglasses::heart::tada::sparkles::1st_place_medal::+1:
 
-It even works with plain emojis! 🌵🐦🐬
+This even works with plain emojis! 🌵🐦🐬
 
 Want to skip shortcuts? Sure! Try using backslashes. \:cool\:
 
@@ -89,7 +89,7 @@ What if I put emojis inside a code block? 🙉:grinning:🙉
 
 Get turns into this:
 
-![](https://imgur.com/uLUgVX8.png)
+![](https://i.imgur.com/9hiM7ff.png)
 
 That's it! 🎉
 
