@@ -77,8 +77,8 @@ function parseTwemoji(content, classname, styles) {
   $emojis.addClass(classname).css(styles);
   $emojis.each((i, el) => {
     const $emoji = $(el);
-    const unicode = encodeURIComponent($emoji.attr('alt'));
-    $emoji.attr('alt', unicode);
+    const encoded = encodeURIComponent($emoji.attr('alt'));
+    $emoji.attr('alt', encoded);
   });
 
   return $.html();
