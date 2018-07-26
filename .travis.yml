@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "8"
+cache:
+  yarn: true
+  directories:
+    - node_modules
+deploy:
+  provider: npm
+  email: tri613@gmail.com
+  api_key:
+    secure: N33Je4T6Jjdhxh8MQtA7PMduHJliCykM3Pv6lLZsyETZxh2MudtoAjohPwLdYlTQd9V1iYMuTaWCK+3KrUawC47TDjvZwyi33RC/ciIwhmdygodgwAo/haVFOg6MnYDn6pS+POK6uAtuBjdNRIW/k5y1pCReUZOzktCA/GSMiGJJQ++SUBwhOyiH7k5Qs+13QugI9IDqsUQOMSSL0YSPmniQIm0+Xq6F1wxbVGg7oV2gLj3CeWKh7wcbIhzqPOlghbDkKpBUFm9Tq2JuCl1VldVCQBcIhPezky723JACPg64AAZ88zIjfBAlG/pKqWjSFKMwO2SKTdt+B/zyM5Hz3SSbwLXN/2gFSokGhZz0VGeJ1B4fDb7qntOCvjtFUlRTHWMHKoP9hGNctz5KI2SxMrqGx2jUwaLULmEGh+aU2YRXY1yqC2cy23gLI2F8KX0b937oPlGD1HUnkXGv2XkPjzz6Naivjm5HlUNLRQ+tnJdpnxqvqOm//GsM2dsrH97CyDes3z3v7GR7scdOZ07vuZB6hz3/T0oHKoNynB2YnirwMvtkL6ER4q5dXUikhem5RZ6ED3d0Y/WwlU1j0q/KuJi4ux8fFbodTcWNUjXyz3OJdGTvnW9xt+cN7bFko7HeVXyZnkdL20/O12YTvoh9BWSf3eS9Z+Rm1W4UXrxZE5Y=
+  on:
+    branch: master

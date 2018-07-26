@@ -19,7 +19,8 @@
     "gatsby-transformer-remark": "^1.7.42"
   },
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "repository": {
     "type": "git",
