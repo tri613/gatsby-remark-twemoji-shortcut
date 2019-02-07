@@ -1,4 +1,5 @@
-const { CodeBlockExtractor, shortcutToTwemoji } = require('./lib');
+const CodeBlockExtractor = require('./src/codeBlockExtractor');
+const shortcutToTwemoji = require('./src/shortcutToTwemoji');
 
 function mutateSource({ markdownNode }, pluginOptions) {
   const content = markdownNode.internal.content;

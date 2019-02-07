@@ -1,43 +1,5 @@
 const cheerio = require('cheerio');
-const {
-  shortcutToUnicode,
-  replaceShortcut,
-  shortcutToTwemoji,
-  CodeBlockExtractor
-} = require('./../lib');
-
-describe('shortcutToUnicode', () => {
-  it('should return unicode instead of shortcuts', () => {
-    expect(shortcutToUnicode(':smile:')).toBe('😄');
-    expect(shortcutToUnicode(':+1:')).toBe('👍');
-    expect(shortcutToUnicode(':sunglasses:')).toBe('😎');
-    expect(shortcutToUnicode(':heart:')).toBe('❤️');
-  });
-
-  it('should return null if unicode not found', () => {
-    expect(shortcutToUnicode(':whatever:')).toBeNull();
-    expect(shortcutToUnicode(':123:')).toBeNull();
-  });
-});
-
-describe('replaceShortcut', () => {
-  const replaceWithUnicode = shortcut => {
-    const unicode = shortcutToUnicode(shortcut);
-    return unicode ? unicode : shortcut;
-  };
-
-  it('shoud replace all valid shortcuts to emojis', () => {
-    const content = 'simple one :100::+1::-1::heart_eyes:';
-    const result = replaceShortcut(content, replaceWithUnicode);
-    expect(result).toBe('simple one 💯👍👎😍');
-  });
-
-  it('should work fine with invalid shortcuts', () => {
-    const content = ':some content :123:34:45:cool::sunglasses:heart:';
-    const result = replaceShortcut(content, replaceWithUnicode);
-    expect(result).toBe(':some content :123:34:45🆒😎heart:');
-  });
-});
+const shortcutToTwemoji = require('./../src/shortcutToTwemoji');
 
 describe('shortcutToTwemoji', () => {
   it('should return emoji instead of shortcuts', () => {
@@ -140,17 +102,5 @@ describe('shortcutToTwemoji', () => {
     expect(
       classnames.every(classname => classname.includes('emoji'))
     ).toBeTruthy();
-  });
-});
-
-describe('CodeBlockExtractor', () => {
-  it('should put back code correctly', () => {
-    const original =
-      'simple_text\n```js\nvar foo = "bar";\n```\nanother line\n other_text `inline-code`\nend_of_text';
-    const extractor = new CodeBlockExtractor();
-    const extracted = extractor.extract(original);
-
-    const result = extractor.putBack(extracted);
-    expect(result).toBe(original);
   });
 });

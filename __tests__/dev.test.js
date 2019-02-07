@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
-// const remark = require('remark');
-// const visit = require('unist-util-visit');
 
 describe('cheerio', () => {
   it('should return string without wrapped html tags', () => {
@@ -24,20 +22,6 @@ describe('cheerio', () => {
   });
 });
 
-// describe('remark', () => {
-//   it('should just print text node', () => {
-//     const content = fs.readFileSync(path.resolve(__dirname, './example.md'));
-//     const tree = remark().parse(content);
-//     const skipTypes = ['text'];
-
-//     visit(
-//       tree,
-//       node => skipTypes.includes(node.type),
-//       node => {} //console.log(node.value)
-//     );
-//   });
-// });
-
 describe('code block', () => {
   it('should strip all code blocks', () => {
     const content =
@@ -53,10 +37,8 @@ describe('code block', () => {
       }
     );
 
-    const original = stripCode.replace(
-      /@+/g,
-      (cypher, index) =>
-        codeCache[index] ? codeCache[index] : ' '.repeat(cypher.length)
+    const original = stripCode.replace(/@+/g, (cypher, index) =>
+      codeCache[index] ? codeCache[index] : ' '.repeat(cypher.length)
     );
   });
 });
